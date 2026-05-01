@@ -33,8 +33,8 @@ const register = async (req, res) => {
     // set cookie (secure options)
     res.cookie("token", token, {
       httpOnly: true,
-      secure: false, // 👉 production me true
-      sameSite: "lax",
+      secure: true, // 👉 production me true
+      sameSite: "none",
       maxAge: 3 * 24 * 60 * 60 * 1000,
     });
 
@@ -89,8 +89,8 @@ const login = async (req, res) => {
     // set cookie (🔥 secure)
     res.cookie("token", token, {
       httpOnly: true,
-      secure: false, // 👉 production me true
-      sameSite: "lax",
+      secure: true, // 👉 production me true
+      sameSite: "none",
       maxAge: 3 * 24 * 60 * 60 * 1000,
     });
 
@@ -131,8 +131,8 @@ const logout = async (req, res) => {
     // clear cookie (same options )
     res.clearCookie("token", {
       httpOnly: true,
-      secure: false, // 👉 production me true
-      sameSite: "lax",
+      secure: true, // 👉 production me true
+      sameSite: "none",
     });
 
     res.status(200).json({
