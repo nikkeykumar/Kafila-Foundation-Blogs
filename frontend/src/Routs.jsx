@@ -2,7 +2,7 @@ import { createBrowserRouter } from "react-router";
 import Blog from "./pages/Blog";
 import BlogDetail from "./pages/BlogDetail";
 import Register from "./pages/Register";
-import Login from "./pages/login";
+import Login from "./pages/Login";
 import AdminPage from "./admin/AdminPage";
 import ProtectedRoute from "./ProtectedRoute";
 import CreatBlog from "./admin/CreatBlog";
