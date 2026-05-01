@@ -1,24 +1,30 @@
 import { createContext, useEffect, useState } from "react";
+import { getCurrentUser } from "../src/service/auth.service"; // tumhari API
 
 export const AuthContext = createContext();
 
 export const AuthProvider = ({ children }) => {
   const [user, setUser] = useState(null);
-  const [loading, setLoading] = useState(true); // 🔥 add
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    const savedUser = localStorage.getItem("user");
+    const checkUser = async () => {
+      try {
+        const res = await getCurrentUser(); // 🔥 backend call
+        setUser(res.user);
+      } catch (error) {
+        setUser(null); // token invalid / cookie missing
+      } finally {
+        setLoading(false);
+      }
+    };
 
-    if (savedUser) {
-      setUser(JSON.parse(savedUser));
-    }
-
-    setLoading(false); // 🔥 done loading
+    checkUser();
   }, []);
 
   return (
     <AuthContext.Provider value={{ user, setUser, loading }}>
-      {children}
+      {!loading && children}
     </AuthContext.Provider>
   );
 };
