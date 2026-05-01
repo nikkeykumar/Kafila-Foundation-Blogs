@@ -1,0 +1,28 @@
+@import "tailwindcss";
+@plugin "@tailwindcss/typography";
+
+
+.filter-tab {
+  @apply px-4 py-2 rounded-full border border-gray-300 text-gray-700;
+}
+
+.filter-tab-active {
+  @apply bg-green-900 text-white border-green-900;
+}
+
+.filter-tab-inactive {
+  @apply hover:bg-gray-100;
+}
+
+@keyframes fadeUp {
+  0% {
+    transform: translateY(40px);
+    opacity: 0;
+  }
+  100% {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+
