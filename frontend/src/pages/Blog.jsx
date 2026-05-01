@@ -3,6 +3,8 @@ import Navbar from "../componant/Navebar";
 import BlogCard from "../componant/BlogCard";
 import Footer from "../componant/Footer";
 import { getAllBlogs } from "../service/Blogservice";
+import logo from "../assets/logo-DvortFBw.png";
+import banner from "../assets/banner-hero-ChglcoR-.png"
 
 function Blog() {
   const [blogs, setBlogs] = useState([]);
@@ -36,7 +38,7 @@ function Blog() {
         {/* Hero Section */}
         <section className="relative min-h-75 md:min-h-100 lg:min-h-125 flex items-center justify-center overflow-hidden">
           <img
-            src="/src/assets/banner-hero-ChglcoR-.png"
+            src={banner}
             className="absolute inset-0 w-full h-full object-cover"
           />
           <div className="absolute inset-0 bg-[rgba(23,54,38,0.6)]"></div>
@@ -44,7 +46,7 @@ function Blog() {
           <div className="relative z-10 max-w-5xl mx-auto px-4 text-center text-white pt-16">
             <div className="flex justify-center mb-6">
               <img
-                src="/src/assets/logo-DvortFBw.png"
+                src={logo}
                 className="w-15 h-15 md:w-28 md:h-28 object-contain"
               />
             </div>
