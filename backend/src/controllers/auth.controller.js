@@ -31,12 +31,8 @@ const register = async (req, res) => {
     );
 
     // set cookie (secure options)
-    res.cookie("token", token, {
-      httpOnly: true,
-      secure: true, // 👉 production me true
-      sameSite: "none",
-      maxAge: 3 * 24 * 60 * 60 * 1000,
-    });
+    res.cookie("token", token
+    );
 
     res.status(201).json({
       user: {
@@ -87,12 +83,8 @@ const login = async (req, res) => {
     );
 
     // set cookie (🔥 secure)
-    res.cookie("token", token, {
-      httpOnly: true,
-      secure: true, // 👉 production me true
-      sameSite: "none",
-      maxAge: 3 * 24 * 60 * 60 * 1000,
-    });
+    res.cookie("token", token
+    );
 
     res.status(200).json({
       user: {
@@ -129,11 +121,8 @@ const logout = async (req, res) => {
     await tokenBlacklistModel.create({ token });
 
     // clear cookie (same options )
-    res.clearCookie("token", {
-      httpOnly: true,
-      secure: true, // 👉 production me true
-      sameSite: "none",
-    });
+    res.clearCookie("token",
+    );
 
     res.status(200).json({
       message: "Logout successfully",
