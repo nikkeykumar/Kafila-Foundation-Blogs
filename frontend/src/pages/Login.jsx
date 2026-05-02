@@ -15,17 +15,17 @@ const Login = () => {
 
     try {
       const res = await authlogin(email, password);
-      console.log("Login response:", res);
+     
 
      
         // ✅ save user + token
-      console.log("Saving user to context:", res.user);
+    
         setUser(res.user);
-        console.log("Saving user to localStorage:", res.user);
+       
         localStorage.setItem("user", JSON.stringify(res.user));
       
        
-          console.log("Saving token to localStorage:", res.token);
+       
 
           localStorage.setItem( "token", res.token);
        
