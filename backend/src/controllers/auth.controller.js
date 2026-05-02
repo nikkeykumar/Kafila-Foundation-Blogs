@@ -97,9 +97,9 @@ const login = async (req, res) => {
     //   maxAge: 3 * 24 * 60 * 60 * 1000,
     // });
 
-
+      localStorage.setItem("token", token);
     res.status(200).json({
-      token, // 🔥 token in response for frontend storage (optional if using cookies)
+       token, // 🔥 token in response for frontend storage (optional if using cookies)
       user: {
         _id: isuser._id,
         email: isuser.email,

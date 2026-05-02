@@ -17,18 +17,18 @@ const Login = () => {
       const res = await authlogin(email, password);
       console.log("Login response:", res);
 
-      if (res && res.user) {
+     
         // ✅ save user + token
       console.log("Saving user to context:", res.user);
         setUser(res.user);
         console.log("Saving user to localStorage:", res.user);
         localStorage.setItem("user", JSON.stringify(res.user));
       
-        if (res.token) {
+       
           console.log("Saving token to localStorage:", res.token);
 
           localStorage.setItem( "token", res.token);
-        }
+       
 
         // 🔥 role-based redirect
         if (res.user.role === "admin") {
@@ -36,9 +36,7 @@ const Login = () => {
         } else {
           navigate("/");
         }
-      } else {
-        console.error("Login: no user in response", res);
-      }
+     
     } catch (err) {
       console.error("Login error:", err);
     }
