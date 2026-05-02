@@ -6,9 +6,9 @@ const jwt = require("jsonwebtoken");
 // auth middleware
 async function authMiddleware(req, res, next) {
   try {
+    console.log(req ,"ye req ha ")
     // 🔥 fix split
     const token = req.cookies.token || req.headers.authorization?.split(" ")[1];
-  
 
     if (!token) {
       return res.status(401).json({

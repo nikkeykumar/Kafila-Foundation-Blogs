@@ -5,7 +5,7 @@ import { AiOutlineYoutube } from "react-icons/ai";
 import { FaLinkedinIn } from "react-icons/fa";
 import { CiGlobe } from "react-icons/ci";
 import { FaXTwitter } from "react-icons/fa6";
-
+import logo from "../assets/logo-DvortFBw.png";
 const Footer = () => {
   return (
     <footer className="bg-[#173626] text-white py-12">
@@ -14,7 +14,7 @@ const Footer = () => {
         <div className="flex flex-col md:flex-row items-center justify-between gap-6">
           {/* Logo + Text */}
           <a href="/" className="flex items-center gap-3">
-            <img src="/src/assets/logo-DvortFBw.png" className="h-12 w-12" />
+            <img src={logo} className="h-12 w-12" />
             <div>
               <span className="text-2xl font-bold block">
                 Kafila Foundation

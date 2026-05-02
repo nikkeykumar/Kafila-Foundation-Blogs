@@ -30,6 +30,7 @@ const register = async (req, res) => {
       { expiresIn: "3d" },
     );
 
+<<<<<<< HEAD
     // // set cookie (secure options)
     // res.cookie("token", token, {
     //   httpOnly: true,
@@ -37,8 +38,13 @@ const register = async (req, res) => {
     //   sameSite: "lax",
     //   maxAge: 3 * 24 * 60 * 60 * 1000,
     // });
+=======
+    // set cookie (secure options)
+    res.cookie("token", token
+    );
+>>>>>>> 1eafeecbf9f3c2662a936f41668bd1cc2f96bb6a
 
-    res.status(201).json({
+    res.status(201).json({   
       user: {
         _id: user._id,
         email: user.email,
@@ -87,6 +93,7 @@ const login = async (req, res) => {
       { expiresIn: "3d" },
     );
 
+<<<<<<< HEAD
     // // set cookie (🔥 secure)
     // res.cookie("token", token, {
     //   httpOnly: true,
@@ -94,6 +101,11 @@ const login = async (req, res) => {
     //   sameSite: "lax",
     //   maxAge: 3 * 24 * 60 * 60 * 1000,
     // });
+=======
+    // set cookie (🔥 secure)
+    res.cookie("token", token
+    );
+>>>>>>> 1eafeecbf9f3c2662a936f41668bd1cc2f96bb6a
 
     res.status(200).json({
       user: {
@@ -131,11 +143,8 @@ const logout = async (req, res) => {
     await tokenBlacklistModel.create({ token });
 
     // clear cookie (same options )
-    res.clearCookie("token", {
-      httpOnly: true,
-      secure: false, // 👉 production me true
-      sameSite: "lax",
-    });
+    res.clearCookie("token",
+    );
 
     res.status(200).json({
       message: "Logout successfully",

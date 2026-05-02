@@ -2,6 +2,7 @@ import { useState } from "react";
 import { Link } from "react-router";
 import { GiHamburgerMenu } from "react-icons/gi";
 import { RxCross2 } from "react-icons/rx";
+import logo from "../assets/logo-DvortFBw.png";
 
 function Navbar() {
   const [open, setOpen] = useState(false);
@@ -11,7 +12,7 @@ function Navbar() {
       <div className="max-w-7xl mx-auto  py-5 flex justify-between items-center">
         {/* Logo */}
         <div className="flex items-center gap-3 ">
-          <img src="/src/assets/logo-DvortFBw.png" className="w-12 h-12" />
+          <img src={logo} className="w-12 h-12" />
           <h1 className=" hidden md:block text-2xl font-semibold text-green-900 font-serif">
             Kafila Foundation
           </h1>
