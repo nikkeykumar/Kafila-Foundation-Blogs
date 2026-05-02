@@ -30,15 +30,7 @@ const register = async (req, res) => {
       { expiresIn: "3d" },
     );
 
-
-    // // set cookie (secure options)
-    // res.cookie("token", token, {
-    //   httpOnly: true,
-    //   secure: false, // 👉 production me true
-    //   sameSite: "lax",
-    //   maxAge: 3 * 24 * 60 * 60 * 1000,
-    // });
-
+   
     res.status(201).json({
       token, // token in response for frontend storage (optional if using cookies)
       user: {
@@ -88,18 +80,9 @@ const login = async (req, res) => {
       { expiresIn: "3d" },
     );
 
-
-    // // set cookie (🔥 secure)
-    // res.cookie("token", token, {
-    //   httpOnly: true,
-    //   secure: false, // 👉 production me true
-    //   sameSite: "lax",
-    //   maxAge: 3 * 24 * 60 * 60 * 1000,
-    // });
-
-      localStorage.setItem("token", token);
+    
     res.status(200).json({
-       token, // 🔥 token in response for frontend storage (optional if using cookies)
+      token, // 🔥 token in response for frontend storage (optional if using cookies)
       user: {
         _id: isuser._id,
         email: isuser.email,

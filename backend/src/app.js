@@ -15,8 +15,9 @@ const corsOptions = {
 const app = express();
 app.use(cors(corsOptions));
 app.use(express.json());
-app.use(cookieParser());
+// app.use(cookieParser());
 app.use(express.urlencoded({ extended: true }));
+
 
 // routes
 app.use("/api/auth", authRoutes);
