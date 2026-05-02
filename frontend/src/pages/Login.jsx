@@ -18,11 +18,12 @@ const Login = () => {
 
       if (res && res.user) {
         // ✅ save user + token
+        console.log("Login successful:", res);
         setUser(res.user);
         localStorage.setItem("user", JSON.stringify(res.user));
-
-        if (res.token) {
-          localStorage.setItem("token", res.token);
+      
+        if (res.user.token) {
+          localStorage.setItem("token", res.user.token);
         }
 
         // 🔥 role-based redirect

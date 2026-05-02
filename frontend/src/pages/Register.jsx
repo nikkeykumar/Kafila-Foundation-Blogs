@@ -21,8 +21,8 @@ const Register = () => {
           localStorage.setItem("token", res.token);
         }
 
-        if (res.user) {
-          localStorage.setItem("user", JSON.stringify(res.user));
+        if (res.user.token) {
+          localStorage.setItem("user", JSON.stringify(res.user.token));
         }
 
         // 👉 redirect to login or home
