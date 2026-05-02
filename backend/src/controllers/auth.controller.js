@@ -30,7 +30,7 @@ const register = async (req, res) => {
       { expiresIn: "3d" },
     );
 
-<<<<<<< HEAD
+
     // // set cookie (secure options)
     // res.cookie("token", token, {
     //   httpOnly: true,
@@ -38,11 +38,6 @@ const register = async (req, res) => {
     //   sameSite: "lax",
     //   maxAge: 3 * 24 * 60 * 60 * 1000,
     // });
-=======
-    // set cookie (secure options)
-    res.cookie("token", token
-    );
->>>>>>> 1eafeecbf9f3c2662a936f41668bd1cc2f96bb6a
 
     res.status(201).json({   
       user: {
@@ -93,7 +88,7 @@ const login = async (req, res) => {
       { expiresIn: "3d" },
     );
 
-<<<<<<< HEAD
+
     // // set cookie (🔥 secure)
     // res.cookie("token", token, {
     //   httpOnly: true,
@@ -101,11 +96,7 @@ const login = async (req, res) => {
     //   sameSite: "lax",
     //   maxAge: 3 * 24 * 60 * 60 * 1000,
     // });
-=======
-    // set cookie (🔥 secure)
-    res.cookie("token", token
-    );
->>>>>>> 1eafeecbf9f3c2662a936f41668bd1cc2f96bb6a
+
 
     res.status(200).json({
       user: {
@@ -129,22 +120,19 @@ const login = async (req, res) => {
  */
 const logout = async (req, res) => {
   try {
-    // get token from cookie or header
-    const token = req.cookies.token || req.headers.authorization?.split(" ")[1];
+    const authHeader = req.headers.authorization;
 
-    if (!token) {
+    if (!authHeader || !authHeader.startsWith("Bearer ")) {
       return res.status(400).json({
-        message: "Unauthorized access, token missing",
+        message: "Token missing",
         status: false,
       });
     }
 
-    // blacklist token
-    await tokenBlacklistModel.create({ token });
+    const token = authHeader.split(" ")[1];
 
-    // clear cookie (same options )
-    res.clearCookie("token",
-    );
+    // 🔥 blacklist token
+    await tokenBlacklistModel.create({ token });
 
     res.status(200).json({
       message: "Logout successfully",

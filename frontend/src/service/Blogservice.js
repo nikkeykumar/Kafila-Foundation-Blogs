@@ -2,86 +2,64 @@ import axios from "axios";
 
 const api = axios.create({
   baseURL: `${import.meta.env.VITE_BACKEND_URL}/api/blogs`,
-  withCredentials: true, // Include cookies in requests
 });
 
-export const getAllBlogs = async () => {
-  try {
-    const response = await api.get("/");
-    return response.data;
-  } catch (error) {
-    console.error("Error fetching blogs:", error);
-    throw error;
+// 🔥 interceptor (MOST IMPORTANT)
+api.interceptors.request.use((config) => {
+  const token = localStorage.getItem("token");
+
+  if (token) {
+    config.headers.Authorization = `Bearer ${token}`;
   }
+
+  return config;
+});
+
+// ✅ Public APIs
+export const getAllBlogs = async () => {
+  const res = await api.get("/");
+  return res.data;
 };
 
 export const getBlogBySlug = async (slug) => {
-  try {
-    const response = await api.get(`/${slug}`);
-    
-    return response.data;
-  } catch (error) {
-    console.error("Error fetching blogs:", error);
-    throw error;
-  }
+  const res = await api.get(`/${slug}`);
+  return res.data;
 };
 
+// 🔐 Admin API
 export const adminGetAllBlogs = async () => {
-  try {
-    const response = await api.get("/admin");
-    return response.data;
-  } catch (error) {
-     console.error("Error fetching blogs:", error);
-     throw error;
-  }
-}
+  const res = await api.get("/admin");
+  return res.data;
+};
 
+// 🔐 Create
 export const createBlog = async (blogData) => {
-  try {
-    console.log(blogData);
-    const response = await api.post("/create", blogData, {
-      headers: {
-        "Content-Type": "multipart/form-data",
-      },
-    });
-    return response.data;
-  } catch (error) {
-   console.error("Error fetching blogs:", error);
-   throw error; 
-  }
-}
+  const res = await api.post("/create", blogData, {
+    headers: {
+      "Content-Type": "multipart/form-data",
+    },
+  });
+  return res.data;
+};
 
- export const deleteBlog = async (id) => {
-  try {
-    const response = await api.delete(`/${id}`);
-    return response.data;
-    
-  } catch (error) {
-    console.error("Error fetching blogs:", error);
-    throw error;
-  }
-}
+// 🔐 Delete
+export const deleteBlog = async (id) => {
+  const res = await api.delete(`/${id}`);
+  return res.data;
+};
 
+// 🔐 Update
 export const updateBlog = async (id, blogData) => {
-  try {
-    const response = await api.put(`/${id}`, blogData, {
-      headers: {
-        "Content-Type": "multipart/form-data",
-      },
-    });
-    return response.data;
-  } catch (error) {
-    console.error("Error fetching blogs:", error);
-    throw error;
-  }
-    }
+  const res = await api.put(`/${id}`, blogData, {
+    headers: {
+      "Content-Type": "multipart/form-data",
+    },
+  });
+  return res.data;
+};
 
+// ✅ Single
 export const getsingleBlog = async (id) => {
-  try {
-    const response = await api.get(`/single/${id}`);
-    return response.data;
-  } catch (error) {
-    console.error("Error fetching blog:", error);
-    throw error;
-  }
+  const res = await api.get(`/single/${id}`);
+  return res.data;
 };

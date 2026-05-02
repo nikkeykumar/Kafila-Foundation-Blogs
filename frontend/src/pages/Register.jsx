@@ -1,10 +1,44 @@
-import React from "react";
-import { motion } from "framer-motion";
-import { Link } from "react-router";
+import React, { useState } from "react";
+import { Link, useNavigate } from "react-router";
+import { register } from "../service/auth.service";
+
 const Register = () => {
+  const navigate = useNavigate();
+
+  const [name, setName] = useState("");
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+
+    try {
+      const res = await register(name, email, password);
+
+      if (res) {
+        // 🔥 optional: auto login after register
+        if (res.token) {
+          localStorage.setItem("token", res.token);
+        }
+
+        if (res.user) {
+          localStorage.setItem("user", JSON.stringify(res.user));
+        }
+
+        // 👉 redirect to login or home
+        navigate("/login");
+      }
+    } catch (error) {
+      console.error("Register error:", error);
+    }
+  };
+
   return (
     <div className="min-h-screen flex items-center justify-center bg-[#f7f6f2] px-4">
-      <form className="bg-[#f2efe6] p-6 rounded-xl shadow-md w-full max-w-md space-y-4 transition duration-300 hover:shadow-xl">
+      <form
+        onSubmit={handleSubmit}
+        className="bg-[#f2efe6] p-6 rounded-xl shadow-md w-full max-w-md space-y-4 transition duration-300 hover:shadow-xl"
+      >
         <h2 className="text-2xl font-bold text-center text-[#173626]">
           Register
         </h2>
@@ -14,24 +48,23 @@ const Register = () => {
           <label className="block text-sm mb-1">Name</label>
           <input
             type="text"
-            name="name"
+            value={name}
+            onChange={(e) => setName(e.target.value)}
             placeholder="Enter name"
-            className="w-full border px-3 py-2 rounded-md border-[#e0dcd1]
-        focus:outline-none focus:ring-2 focus:ring-[#173626]
-        transition duration-200 focus:scale-[1.02]"
+            className="w-full border px-3 py-2 rounded-md border-[#e0dcd1]"
             required
           />
         </div>
+
         {/* Email */}
         <div>
           <label className="block text-sm mb-1">Email</label>
           <input
             type="email"
-            name="email"
+            value={email}
+            onChange={(e) => setEmail(e.target.value)}
             placeholder="Enter email"
-            className="w-full border px-3 py-2 rounded-md border-[#e0dcd1]
-        focus:outline-none focus:ring-2 focus:ring-[#173626]
-        transition duration-200 focus:scale-[1.02]"
+            className="w-full border px-3 py-2 rounded-md border-[#e0dcd1]"
             required
           />
         </div>
@@ -41,11 +74,10 @@ const Register = () => {
           <label className="block text-sm mb-1">Password</label>
           <input
             type="password"
-            name="password"
+            value={password}
+            onChange={(e) => setPassword(e.target.value)}
             placeholder="Enter password"
-            className="w-full border px-3 py-2 rounded-md border-[#e0dcd1]
-        focus:outline-none focus:ring-2 focus:ring-[#173626]
-        transition duration-200 focus:scale-[1.02]"
+            className="w-full border px-3 py-2 rounded-md border-[#e0dcd1]"
             required
           />
         </div>
@@ -53,17 +85,16 @@ const Register = () => {
         {/* Button */}
         <button
           type="submit"
-          className="
-        w-full bg-[#173626] text-white py-2 rounded-md
-        transition duration-300
-        hover:opacity-90 hover:scale-105
-        active:scale-95
-      "
+          className="w-full bg-[#173626] text-white py-2 rounded-md"
         >
           Register
         </button>
+
         <p className="text-center text-sm text-[#173626]">
-          Already have an account?<Link to="/login">Login</Link>{" "}
+          Already have an account?{" "}
+          <Link to="/login" className="underline">
+            Login
+          </Link>
         </p>
       </form>
     </div>

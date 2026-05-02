@@ -2,19 +2,19 @@ const userModel = require("../models/user.model");
 const tokenBlacklistModel = require("../models/tokenBlacklistModel");
 const jwt = require("jsonwebtoken");
 
-
-// auth middleware
+// 🔐 auth middleware
 async function authMiddleware(req, res, next) {
   try {
-    console.log(req ,"ye req ha ")
-    // 🔥 fix split
-    const token = req.cookies.token || req.headers.authorization?.split(" ")[1];
+    // ✅ only header
+    const authHeader = req.headers.authorization;
 
-    if (!token) {
+    if (!authHeader || !authHeader.startsWith("Bearer ")) {
       return res.status(401).json({
-        message: "Unauthorized access, token missing",
+        message: "Authorization token missing",
       });
     }
+
+    const token = authHeader.split(" ")[1];
 
     // blacklist check
     const isBlacklisted = await tokenBlacklistModel.findOne({ token });
@@ -44,8 +44,9 @@ async function authMiddleware(req, res, next) {
     });
   }
 }
-// admin middleware
-async function adminMiddleware(req, res, next) {
+
+// 🔐 admin middleware
+function adminMiddleware(req, res, next) {
   if (req.user.role !== "admin") {
     return res.status(403).json({
       message: "Access denied, admin only",
