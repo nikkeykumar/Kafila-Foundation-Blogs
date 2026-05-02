@@ -39,13 +39,13 @@ const register = async (req, res) => {
     //   maxAge: 3 * 24 * 60 * 60 * 1000,
     // });
 
-    res.status(201).json({   
+    res.status(201).json({
+      token, // token in response for frontend storage (optional if using cookies)
       user: {
         _id: user._id,
         email: user.email,
         name: user.name,
         role: user.role,
-        token, // token in response for frontend storage (optional if using cookies)
       },
       status: true,
     });
@@ -99,12 +99,12 @@ const login = async (req, res) => {
 
 
     res.status(200).json({
+      token, // 🔥 token in response for frontend storage (optional if using cookies)
       user: {
         _id: isuser._id,
         email: isuser.email,
         name: isuser.name,
         role: isuser.role,
-        token, // 🔥 token in response for frontend storage (optional if using cookies)
       },
       status: true,
     });
