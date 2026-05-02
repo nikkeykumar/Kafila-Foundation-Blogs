@@ -30,13 +30,13 @@ const register = async (req, res) => {
       { expiresIn: "3d" },
     );
 
-    // set cookie (secure options)
-    res.cookie("token", token, {
-      httpOnly: true,
-      secure: false, // 👉 production me true
-      sameSite: "lax",
-      maxAge: 3 * 24 * 60 * 60 * 1000,
-    });
+    // // set cookie (secure options)
+    // res.cookie("token", token, {
+    //   httpOnly: true,
+    //   secure: false, // 👉 production me true
+    //   sameSite: "lax",
+    //   maxAge: 3 * 24 * 60 * 60 * 1000,
+    // });
 
     res.status(201).json({
       user: {
@@ -44,6 +44,7 @@ const register = async (req, res) => {
         email: user.email,
         name: user.name,
         role: user.role,
+        token, // token in response for frontend storage (optional if using cookies)
       },
       status: true,
     });
@@ -86,13 +87,13 @@ const login = async (req, res) => {
       { expiresIn: "3d" },
     );
 
-    // set cookie (🔥 secure)
-    res.cookie("token", token, {
-      httpOnly: true,
-      secure: false, // 👉 production me true
-      sameSite: "lax",
-      maxAge: 3 * 24 * 60 * 60 * 1000,
-    });
+    // // set cookie (🔥 secure)
+    // res.cookie("token", token, {
+    //   httpOnly: true,
+    //   secure: false, // 👉 production me true
+    //   sameSite: "lax",
+    //   maxAge: 3 * 24 * 60 * 60 * 1000,
+    // });
 
     res.status(200).json({
       user: {
@@ -100,6 +101,7 @@ const login = async (req, res) => {
         email: isuser.email,
         name: isuser.name,
         role: isuser.role,
+        token, // 🔥 token in response for frontend storage (optional if using cookies)
       },
       status: true,
     });
